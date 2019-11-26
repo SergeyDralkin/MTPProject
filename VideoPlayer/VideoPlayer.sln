@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29411.108
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VideoPlayer", "WindowsApplication\VideoPlayer.csproj", "{BD84FAE4-0BA1-436B-8F08-F59C35180F16}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScrollBarEnhancedControl", "ScrollBarEnhancedControl\ScrollBarEnhancedControl.csproj", "{F3977CA6-CF97-4A06-8A5D-91D72775A3D9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SideBar", "SideBar\SideBar\SideBar.csproj", "{1E7A8FB6-1DC1-4C69-8B25-1172B7E0EE91}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BD84FAE4-0BA1-436B-8F08-F59C35180F16}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BD84FAE4-0BA1-436B-8F08-F59C35180F16}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BD84FAE4-0BA1-436B-8F08-F59C35180F16}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BD84FAE4-0BA1-436B-8F08-F59C35180F16}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F3977CA6-CF97-4A06-8A5D-91D72775A3D9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F3977CA6-CF97-4A06-8A5D-91D72775A3D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F3977CA6-CF97-4A06-8A5D-91D72775A3D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F3977CA6-CF97-4A06-8A5D-91D72775A3D9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1E7A8FB6-1DC1-4C69-8B25-1172B7E0EE91}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1E7A8FB6-1DC1-4C69-8B25-1172B7E0EE91}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1E7A8FB6-1DC1-4C69-8B25-1172B7E0EE91}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1E7A8FB6-1DC1-4C69-8B25-1172B7E0EE91}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {71E780BE-8D8D-4E76-95C8-E2EBA02FB02D}
+	EndGlobalSection
+EndGlobal
