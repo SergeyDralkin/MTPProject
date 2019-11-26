@@ -11,9 +11,6 @@ using Newtonsoft.Json;
 
 namespace SideBar
 {
-
-
-
     public partial class Playlist : Form
     {
         public Playlist()

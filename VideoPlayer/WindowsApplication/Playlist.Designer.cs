@@ -129,6 +129,7 @@
             this.columnHeader3,
             this.columnHeader4});
             this.lv.GridLines = true;
+            this.lv.HideSelection = false;
             this.lv.Location = new System.Drawing.Point(7, 7);
             this.lv.Name = "lv";
             this.lv.Size = new System.Drawing.Size(300, 262);

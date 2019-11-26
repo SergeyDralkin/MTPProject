@@ -7,6 +7,7 @@ using ProXoft.WinForms;
 using System.Data;
 
 using Newtonsoft.Json;
+using SideBar;
 
 namespace WindowsApplication
 {
@@ -303,6 +304,12 @@ namespace WindowsApplication
             FormBookmark.Video = video;
             FormBookmark.filename = filename;
             FormBookmark.Show();
-        }        
+        }
+
+        private void îòêğûòüÏëåéëèñòToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Playlist playlist = new Playlist();
+            playlist.Show();
+        }
     }
 }

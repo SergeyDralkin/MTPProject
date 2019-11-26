@@ -259,15 +259,16 @@ namespace WindowsApplication
             // BT_OpenFile
             // 
             this.BT_OpenFile.Name = "BT_OpenFile";
-            this.BT_OpenFile.Size = new System.Drawing.Size(180, 22);
+            this.BT_OpenFile.Size = new System.Drawing.Size(176, 22);
             this.BT_OpenFile.Text = "ќткрыть";
             this.BT_OpenFile.Click += new System.EventHandler(this.BT_OpenFile_Click_1);
             // 
             // открытьѕлейлистToolStripMenuItem
             // 
             this.открытьѕлейлистToolStripMenuItem.Name = "открытьѕлейлистToolStripMenuItem";
-            this.открытьѕлейлистToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.открытьѕлейлистToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
             this.открытьѕлейлистToolStripMenuItem.Text = "ќткрыть плейлист";
+            this.открытьѕлейлистToolStripMenuItem.Click += new System.EventHandler(this.открытьѕлейлистToolStripMenuItem_Click);
             // 
             // создать«акладкуToolStripMenuItem
             // 
