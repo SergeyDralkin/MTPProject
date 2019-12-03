@@ -56,6 +56,7 @@ namespace WindowsApplication
 
         private void buSaveBookmark_Click(object sender, EventArgs e)
         {
+            
             CheckParameters();
             if (i == 0)
             {
@@ -78,6 +79,9 @@ namespace WindowsApplication
                     w.Close();
                     fs.Close();
                 }
+                SideBar.Playlist SB = new SideBar.Playlist();
+                SB.Show();
+                SB.ReloadList(dataSet);
             }
         }
         private void cbCheckedChanged(object sender, EventArgs e)

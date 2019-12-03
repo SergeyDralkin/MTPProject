@@ -56,7 +56,27 @@ namespace SideBar
         {
             lv.Items.Remove(lv.SelectedItems[0]); 
         }
+
+
+        public void ReloadList(DataSet Videolist) 
+        {
+            
+            DataTable dataTable = Videolist.Tables[0];
+            var list = lv;
+            ListViewItem lvadd;
+            foreach (DataRow row in dataTable.Rows)
+            {
+                lvadd = new ListViewItem(Convert.ToString(row["Name"]));
+                lvadd.SubItems.Add(Convert.ToString(row["Start"]));
+                lvadd.SubItems.Add(Convert.ToString(row["Finish"]));
+                lvadd.SubItems.Add(Convert.ToString(row["Color"]));
+                list.Items.Add(lvadd);
+            }
+            
+        }
+
     }
+
     public class Bookmark
     {
         public string Name { get; set; }
