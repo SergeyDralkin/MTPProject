@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using System.IO;
 using System.Data;
 using Microsoft.DirectX.AudioVideoPlayback;
+using ProXoft.WinForms;
 
 using Newtonsoft.Json;
 
@@ -16,11 +17,17 @@ namespace WindowsApplication
         public DataTable table;
         public Video Video;
         public string filename;
-        int i = 0; // Переменная проверки   
-        
+        public BasicShapeScrollBarBookmark Bookmark;
+        int i = 0; // Переменная проверки
+        ColorDialog MyDialog = new ColorDialog();
+        public ScrollBarEnhanced Track_AudioTrack;
+        int StartValue;
+        int FinishValue;
+        SideBar.Playlist SB = new SideBar.Playlist();
+
         public CreateBookmark()
         {
-            InitializeComponent();            
+            InitializeComponent();
             laColor.Text = "";
         }
 
@@ -28,8 +35,8 @@ namespace WindowsApplication
         {
             if (tbNameBookmark.Text == "Введите название закладки")
             {
-                tbNameBookmark.Text = null;                
-            }            
+                tbNameBookmark.Text = null;
+            }
             tbNameBookmark.BackColor = Color.White;
             tbNameBookmark.ForeColor = Color.Black;
         }
@@ -51,12 +58,12 @@ namespace WindowsApplication
             mtbStart.ResetText();
             mtbFinish.ResetText();
             cbStart.Checked = false;
-            cbFinish.Checked = false;            
+            cbFinish.Checked = false;
         }
 
         private void buSaveBookmark_Click(object sender, EventArgs e)
         {
-            
+
             CheckParameters();
             if (i == 0)
             {
@@ -65,7 +72,7 @@ namespace WindowsApplication
                 newRow["Start"] = mtbStart.Text.ToString();
                 newRow["Finish"] = mtbFinish.Text.ToString();
                 newRow["Color"] = laColor.Text.ToString();
-                table.Rows.Add(newRow);                
+                table.Rows.Add(newRow);
 
                 dataSet.AcceptChanges();
 
@@ -74,12 +81,17 @@ namespace WindowsApplication
 
                 using (FileStream fs = new FileStream(filename + "+" + Video.Duration + ".json", FileMode.Create))
                 {
-                    StreamWriter w = new StreamWriter(fs);  
+                    StreamWriter w = new StreamWriter(fs);
                     w.WriteLine(json);
                     w.Close();
                     fs.Close();
                 }
-                SideBar.Playlist SB = new SideBar.Playlist();
+
+                SplitSecond();
+                Bookmark = new BasicShapeScrollBarBookmark(tbNameBookmark.Text.ToString() + "Start", StartValue, ScrollBarBookmarkAlignment.LeftOrTop, 5, 5, ScrollbarBookmarkShape.Rectangle, laColor.ForeColor, true, false, null);
+                Track_AudioTrack.Bookmarks.Add(Bookmark);
+                Bookmark = new BasicShapeScrollBarBookmark(tbNameBookmark.Text.ToString() + "Finish", FinishValue, ScrollBarBookmarkAlignment.LeftOrTop, 5, 5, ScrollbarBookmarkShape.Rectangle, laColor.ForeColor, true, false, null);
+                Track_AudioTrack.Bookmarks.Add(Bookmark);
                 SB.Show();
                 SB.ReloadList(dataSet);
             }
@@ -93,7 +105,7 @@ namespace WindowsApplication
                 mtbStart.BackColor = Color.White;
                 if (cbStart.Checked == true)
                 {
-                    mtbStart.Enabled = false;                    
+                    mtbStart.Enabled = false;
                     mtbStart.Text = labelCurrentPosition.Text.ToString();
                 }
                 if (cbStart.Checked == false)
@@ -114,11 +126,11 @@ namespace WindowsApplication
                 {
                     mtbFinish.Clear();
                     mtbFinish.Enabled = true;
-                }                
+                }
             }
         }
         void CheckParameters()
-        {            
+        {
             if (tbNameBookmark.Text == null || tbNameBookmark.Text == String.Empty || tbNameBookmark.Text == "Введите название закладки")
             {
                 tbNameBookmark.BackColor = Color.Red;
@@ -132,12 +144,12 @@ namespace WindowsApplication
             }
             if (mtbStart.Text == null || mtbStart.Text == String.Empty || mtbStart.Text == "  :")
             {
-                mtbStart.BackColor = Color.Red;                
+                mtbStart.BackColor = Color.Red;
                 i++;
             }
             else
             {
-                mtbStart.BackColor = Color.White;                
+                mtbStart.BackColor = Color.White;
             }
             if (mtbFinish.Text == null || mtbFinish.Text == String.Empty || mtbFinish.Text == "  :" || mtbFinish.Text == "00:00")
             {
@@ -155,17 +167,17 @@ namespace WindowsApplication
             if (laColor.Text == null || laColor.Text == String.Empty || laColor.Text == "" || laColor.Text =="Выберите цвет для закладки!")
             {
                 laColor.Text = "Выберите цвет для закладки!";
-                laColor.BackColor = Color.Red;                
+                laColor.BackColor = Color.Red;
                 i++;
             }
             else
-            {                
+            {
                 laColor.BackColor = Color.Transparent;
             }
         }
 
         void TextBox_Leave(object sender, EventArgs e)
-        {            
+        {
             TextBox thisTextBox = (sender as TextBox);
             string str = thisTextBox.Text;
             int a = str.Length;
@@ -193,7 +205,7 @@ namespace WindowsApplication
                     }
                     return;
                 }
-            }            
+            }
         }
         void mtb_Enter(object sender, EventArgs e)
         {
@@ -203,8 +215,8 @@ namespace WindowsApplication
 
         private void buColorSet_Click(object sender, EventArgs e)
         {
-            ColorDialog MyDialog = new ColorDialog();            
-            MyDialog.AllowFullOpen = false;            
+
+            MyDialog.AllowFullOpen = false;
             MyDialog.ShowHelp = true;
 
             if (MyDialog.ShowDialog() == DialogResult.OK)
@@ -212,7 +224,15 @@ namespace WindowsApplication
                 laColor.BackColor = Color.Transparent;
                 laColor.ForeColor = MyDialog.Color;
                 laColor.Text = MyDialog.Color.Name;
-            }                
+            }
+        }
+        public void SplitSecond()
+        {
+            string[]  StartSplit = mtbStart.Text.ToString().Split(':');
+            string[] FinishSplit = mtbFinish.Text.ToString().Split(':');
+
+            StartValue = int.Parse(StartSplit[0]) * 60 + int.Parse(StartSplit[1]);
+            FinishValue = int.Parse(FinishSplit[0]) * 60 + int.Parse(FinishSplit[1]);
         }
     }
 }
