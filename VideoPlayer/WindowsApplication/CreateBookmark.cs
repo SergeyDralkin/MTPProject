@@ -23,7 +23,7 @@ namespace WindowsApplication
         public ScrollBarEnhanced Track_AudioTrack;
         int StartValue;
         int FinishValue;
-        SideBar.Playlist SB = new SideBar.Playlist();
+        SideBar.Playlist SB;
 
         public CreateBookmark()
         {
@@ -92,7 +92,16 @@ namespace WindowsApplication
                 Track_AudioTrack.Bookmarks.Add(Bookmark);
                 Bookmark = new BasicShapeScrollBarBookmark(tbNameBookmark.Text.ToString() + "Finish", FinishValue, ScrollBarBookmarkAlignment.LeftOrTop, 5, 5, ScrollbarBookmarkShape.Rectangle, laColor.ForeColor, true, false, null);
                 Track_AudioTrack.Bookmarks.Add(Bookmark);
-                SB.Show();
+
+                SB = (SideBar.Playlist)Application.OpenForms["Playlist"];
+
+                if (SB == null)
+                {
+                    SB = new SideBar.Playlist();
+                    SB.Show();
+                }
+
+                SB.Activate();
                 SB.ReloadList(dataSet);
             }
         }
