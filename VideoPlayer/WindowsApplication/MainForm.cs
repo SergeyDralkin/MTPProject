@@ -24,25 +24,12 @@ namespace WindowsApplication
 
         DataSet dataSet = new DataSet("dataSet");
         DataTable table = new DataTable();
+        BasicShapeScrollBarBookmark Bookmark = new BasicShapeScrollBarBookmark();
 
         public MainForm()
         {
-            InitializeComponent();           
-
-            /*//Sample bookmark of value 50 (blue rectangle, left aligned)
-            BasicShapeScrollBarBookmark bookmarkBS = new BasicShapeScrollBarBookmark("BasicShape sample #1", 500, ScrollBarBookmarkAlignment.RightOrBottom, 5, 5, ScrollbarBookmarkShape.Rectangle, Color.Blue, true, false, null);
-            Track_AudioTrack.Bookmarks.Add(bookmarkBS);
-            //Sample bookmark of value 75 (red rectangle, left aligned)
-            bookmarkBS = new BasicShapeScrollBarBookmark("BasicShape sample #2", 750, ScrollBarBookmarkAlignment.LeftOrTop, 5, 5, ScrollbarBookmarkShape.Rectangle, Color.Red, true, false, null);
-            Track_AudioTrack.Bookmarks.Add(bookmarkBS);
-            //Sample bookmark of value 25 (green bar)
-            bookmarkBS = new BasicShapeScrollBarBookmark("BasicShape sample #3", 250, ScrollBarBookmarkAlignment.LeftOrTop, 1, 1, ScrollbarBookmarkShape.Rectangle, Color.Green, true, true, null);
-            Track_AudioTrack.Bookmarks.Add(bookmarkBS);
-            //Sample bookmark of value 40 (green rectangle, centered)
-            bookmarkBS = new BasicShapeScrollBarBookmark("BasicShape sample #4", 400, ScrollBarBookmarkAlignment.Center, 9, 9, ScrollbarBookmarkShape.Rectangle, Color.Green, true, false, null);
-            Track_AudioTrack.Bookmarks.Add(bookmarkBS);*/
-
-
+            InitializeComponent();
+                
             //
             //dataset
             //
@@ -303,6 +290,7 @@ namespace WindowsApplication
             FormBookmark.table = table;
             FormBookmark.Video = video;
             FormBookmark.filename = filename;
+            FormBookmark.Track_AudioTrack = Track_AudioTrack;
             FormBookmark.Show();
         }
 

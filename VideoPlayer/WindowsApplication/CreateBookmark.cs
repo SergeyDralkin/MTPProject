@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using System.IO;
 using System.Data;
 using Microsoft.DirectX.AudioVideoPlayback;
+using ProXoft.WinForms;
 
 using Newtonsoft.Json;
 
@@ -16,8 +17,13 @@ namespace WindowsApplication
         public DataTable table;
         public Video Video;
         public string filename;
+        public BasicShapeScrollBarBookmark Bookmark;
         int i = 0; // Переменная проверки   
-        
+        ColorDialog MyDialog = new ColorDialog();
+        public ScrollBarEnhanced Track_AudioTrack;
+        int StartValue;
+        int FinishValue;
+
         public CreateBookmark()
         {
             InitializeComponent();            
@@ -78,6 +84,12 @@ namespace WindowsApplication
                     w.Close();
                     fs.Close();
                 }
+
+                SplitSecond();
+                Bookmark = new BasicShapeScrollBarBookmark(tbNameBookmark.Text.ToString() + "Start", StartValue, ScrollBarBookmarkAlignment.LeftOrTop, 5, 5, ScrollbarBookmarkShape.Rectangle, laColor.ForeColor, true, false, null);
+                Track_AudioTrack.Bookmarks.Add(Bookmark);
+                Bookmark = new BasicShapeScrollBarBookmark(tbNameBookmark.Text.ToString() + "Finish", FinishValue, ScrollBarBookmarkAlignment.LeftOrTop, 5, 5, ScrollbarBookmarkShape.Rectangle, laColor.ForeColor, true, false, null);
+                Track_AudioTrack.Bookmarks.Add(Bookmark);
             }
         }
         private void cbCheckedChanged(object sender, EventArgs e)
@@ -199,7 +211,7 @@ namespace WindowsApplication
 
         private void buColorSet_Click(object sender, EventArgs e)
         {
-            ColorDialog MyDialog = new ColorDialog();            
+                        
             MyDialog.AllowFullOpen = false;            
             MyDialog.ShowHelp = true;
 
@@ -209,6 +221,14 @@ namespace WindowsApplication
                 laColor.ForeColor = MyDialog.Color;
                 laColor.Text = MyDialog.Color.Name;
             }                
+        }
+        public void SplitSecond()
+        {
+            string[]  StartSplit = mtbStart.Text.ToString().Split(':');
+            string[] FinishSplit = mtbFinish.Text.ToString().Split(':');
+
+            StartValue = int.Parse(StartSplit[0]) * 60 + int.Parse(StartSplit[1]);
+            FinishValue = int.Parse(FinishSplit[0]) * 60 + int.Parse(FinishSplit[1]);
         }
     }
 }
