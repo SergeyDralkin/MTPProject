@@ -25,6 +25,7 @@ namespace WindowsApplication
         DataSet dataSet = new DataSet("dataSet");
         DataTable table = new DataTable();
         BasicShapeScrollBarBookmark Bookmark = new BasicShapeScrollBarBookmark();
+        bool kakdad;
 
         public MainForm()
         {
