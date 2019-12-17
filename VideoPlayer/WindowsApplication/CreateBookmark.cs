@@ -82,7 +82,7 @@ namespace WindowsApplication
 
                 json = JsonConvert.SerializeObject(dataSet);
 
-                CreateNewBookmarks();
+                CreateNewBookmarks(json);
 
                 SplitSecond();
                 Bookmark = new BasicShapeScrollBarBookmark(tbNameBookmark.Text.ToString() + "Start", StartValue, ScrollBarBookmarkAlignment.LeftOrTop, 5, 5, ScrollbarBookmarkShape.Rectangle, laColor.ForeColor, true, false, null);
@@ -281,12 +281,12 @@ namespace WindowsApplication
                 }
             }
         }
-        public void CreateNewBookmarks()
+        public void CreateNewBookmarks(string js)
         {
             using (FileStream fs = new FileStream("JSON/" + filename + "+" + Video.Duration + ".json", FileMode.Create))
             {
                 StreamWriter w = new StreamWriter(fs);
-                w.WriteLine(json);
+                w.WriteLine(js);
                 w.Close();
                 fs.Close();
             }

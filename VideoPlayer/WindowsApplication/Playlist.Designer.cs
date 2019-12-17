@@ -85,6 +85,7 @@
             this.lbPlaylist.Name = "lbPlaylist";
             this.lbPlaylist.Size = new System.Drawing.Size(301, 563);
             this.lbPlaylist.TabIndex = 0;
+            this.lbPlaylist.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.lbPlaylist_MouseDoubleClick);
             // 
             // tpBookmarks
             // 

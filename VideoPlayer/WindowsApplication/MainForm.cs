@@ -190,53 +190,22 @@ namespace WindowsApplication
             //
             //Диалог выбора файла
             //
+
             
+
             var dialog = new OpenFileDialog();
             dialog.Title = "Открыть файл";
             dialog.Filter = "Видео файлы (*.avi; *.mp4; *.qt; *.mov; *.mpg; *.mpeg; *.m1v; *.wmv)|*.avi; *.mp4; *.qt; *.mov; *.mpg; *.mpeg; *.m1v; *.wmv|Все файлы (*.*)|*.*";
             if (dialog.ShowDialog() == DialogResult.OK)
-            {                
+            {
                 //int height = Panel_Video.Height;
                 //int width = Panel_Video.Width;
-                video = new Video(dialog.FileName);
-                audio = new Audio(dialog.FileName);
-                video.Owner = Panel_Video;
-                BT_MM.Enabled = true;
-                BT_Pause.Enabled = true;
-                BT_Play.Enabled = true;
-                BT_PP.Enabled = true;
-                BT_Stop.Enabled = true;
-                Track_AudioTrack.Enabled = true;
-                Track_Balance.Enabled = true;
-                Track_Volume.Enabled = true;
-                Timer100ms.Enabled = true;
-                Track_AudioTrack.Enabled = true;
+
+
+
+                LoadVideo(dialog.FileName);
             }
 
-            //
-            //Обновление данных
-            //
-            filename = Path.GetFileNameWithoutExtension(dialog.FileName);
-            if (video == null)
-            {
-                return;
-            }
-            Text = "Player: " + filename;
-            video.Open(dialog.FileName);
-            audio.Open(dialog.FileName);
-            video.Owner =  Panel_Video;
-            Track_AudioTrack.Maximum = Convert.ToInt32(video.StopPosition / 10000000);
-            Laber_TimeAll.Text = String.Format("{0:00}:{1:00}",  Math.Floor(Track_AudioTrack.Maximum / 60),  Track_AudioTrack.Maximum % 60);
-            Panel_Video.Size = new Size( Size.Width - 38,  Size.Height - 168);
-            if ( Track_Volume.Value == 100)
-            {
-                audio.Volume = 0;
-            }
-            else 
-            {
-                audio.Volume = ((100 -  Track_Volume.Value) * (-100));
-            }
-            BT_Play_Click(null, null);
         }
 
         //
@@ -301,6 +270,50 @@ namespace WindowsApplication
         {
             Playlist playlist = new Playlist();
             playlist.Show();
+        }
+
+        public void LoadVideo(string path)
+        {
+            if (video != null)
+            {
+                video.Dispose();
+                audio.Dispose();
+            }
+            video = new Video(path);
+            audio = new Audio(path);
+            video.Owner = Panel_Video;
+            BT_MM.Enabled = true;
+            BT_Pause.Enabled = true;
+            BT_Play.Enabled = true;
+            BT_PP.Enabled = true;
+            BT_Stop.Enabled = true;
+            Track_AudioTrack.Enabled = true;
+            Track_Balance.Enabled = true;
+            Track_Volume.Enabled = true;
+            Timer100ms.Enabled = true;
+            Track_AudioTrack.Enabled = true;
+
+            filename = Path.GetFileNameWithoutExtension(path);
+            if (video == null)
+            {
+                return;
+            }
+            Text = "Player: " + filename;
+            video.Open(path);
+            audio.Open(path);
+            video.Owner = Panel_Video;
+            Track_AudioTrack.Maximum = Convert.ToInt32(video.StopPosition / 10000000);
+            Laber_TimeAll.Text = String.Format("{0:00}:{1:00}", Math.Floor(Track_AudioTrack.Maximum / 60), Track_AudioTrack.Maximum % 60);
+            Panel_Video.Size = new Size(Size.Width - 38, Size.Height - 168);
+            if (Track_Volume.Value == 100)
+            {
+                audio.Volume = 0;
+            }
+            else
+            {
+                audio.Volume = ((100 - Track_Volume.Value) * (-100));
+            }
+            BT_Play_Click(null, null);
         }
     }
 }
