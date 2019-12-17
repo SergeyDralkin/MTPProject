@@ -103,7 +103,7 @@
             // 
             // buDel
             // 
-            this.buDel.Location = new System.Drawing.Point(0, 275);
+            this.buDel.Location = new System.Drawing.Point(7, 275);
             this.buDel.Name = "buDel";
             this.buDel.Size = new System.Drawing.Size(130, 23);
             this.buDel.TabIndex = 4;
@@ -113,7 +113,7 @@
             // 
             // buTest
             // 
-            this.buTest.Location = new System.Drawing.Point(180, 275);
+            this.buTest.Location = new System.Drawing.Point(177, 275);
             this.buTest.Name = "buTest";
             this.buTest.Size = new System.Drawing.Size(130, 23);
             this.buTest.TabIndex = 3;
@@ -171,6 +171,10 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(345, 653);
             this.Controls.Add(this.tc);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(361, 692);
+            this.MinimumSize = new System.Drawing.Size(361, 692);
             this.Name = "Playlist";
             this.ShowIcon = false;
             this.Text = "Плейлист";
