@@ -151,10 +151,10 @@ namespace WindowsApplication
         {
             if ( WindowState == FormWindowState.Maximized)
             {
-                 Panel_Video.Size =  Size;
+                 Panel_Video.Size = new Size(Size.Width - 18, Size.Height - 168);                 
                  Panel_Video.Location = new Point(0,24);
-                 Track_AudioTrack.Location = new Point(5,0);
-                 Track_AudioTrack.Size = new Size( Size.Width-15,45);
+                 //Track_AudioTrack.Location = new Point(5,0);
+                 //Track_AudioTrack.Size = new Size( Size.Width-15,45);
                  label1.Visible = false;                
                  r.Visible = false;                
                  BT_OpenFile.Visible = false;
@@ -201,10 +201,10 @@ namespace WindowsApplication
                 video = new Video(dialog.FileName);
                 audio = new Audio(dialog.FileName);
                 video.Owner = Panel_Video;
-                BT_MM.Enabled = true;
+                //BT_MM.Enabled = true;
                 BT_Pause.Enabled = true;
                 BT_Play.Enabled = true;
-                BT_PP.Enabled = true;
+                //BT_PP.Enabled = true;
                 BT_Stop.Enabled = true;
                 Track_AudioTrack.Enabled = true;
                 Track_Balance.Enabled = true;

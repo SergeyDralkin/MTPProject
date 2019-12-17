@@ -31,11 +31,6 @@ namespace WindowsApplication
             this.label1 = new System.Windows.Forms.Label();
             this.min = new System.Windows.Forms.Label();
             this.Panel_Video = new System.Windows.Forms.Panel();
-            this.BT_Play = new System.Windows.Forms.Button();
-            this.BT_Pause = new System.Windows.Forms.Button();
-            this.BT_PP = new System.Windows.Forms.Button();
-            this.BT_MM = new System.Windows.Forms.Button();
-            this.BT_Stop = new System.Windows.Forms.Button();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.Ù‡ÈÎToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.BT_OpenFile = new System.Windows.Forms.ToolStripMenuItem();
@@ -43,13 +38,21 @@ namespace WindowsApplication
             this.ÒÓÁ‰‡Ú¸«‡ÍÎ‡‰ÍÛToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.Timer100ms = new System.Windows.Forms.Timer(this.components);
             this.Track_AudioTrack = new ProXoft.WinForms.ScrollBarEnhanced();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.BT_Play = new System.Windows.Forms.Button();
+            this.BT_Stop = new System.Windows.Forms.Button();
+            this.BT_Pause = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.Track_Balance)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Track_Volume)).BeginInit();
             this.menuStrip1.SuspendLayout();
+            this.panel1.SuspendLayout();
+            this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // Track_Balance
             // 
+            this.Track_Balance.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.Track_Balance.Enabled = false;
             this.Track_Balance.Location = new System.Drawing.Point(473, 410);
             this.Track_Balance.Maximum = 20;
@@ -64,6 +67,7 @@ namespace WindowsApplication
             // 
             // Track_Volume
             // 
+            this.Track_Volume.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.Track_Volume.Enabled = false;
             this.Track_Volume.Location = new System.Drawing.Point(17, 414);
             this.Track_Volume.Maximum = 100;
@@ -76,6 +80,7 @@ namespace WindowsApplication
             // 
             // Laber_TimeNow
             // 
+            this.Laber_TimeNow.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.Laber_TimeNow.AutoSize = true;
             this.Laber_TimeNow.BackColor = System.Drawing.Color.White;
             this.Laber_TimeNow.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -88,6 +93,7 @@ namespace WindowsApplication
             // 
             // Laber_TimeAll
             // 
+            this.Laber_TimeAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.Laber_TimeAll.AutoSize = true;
             this.Laber_TimeAll.BackColor = System.Drawing.Color.White;
             this.Laber_TimeAll.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -100,6 +106,7 @@ namespace WindowsApplication
             // 
             // r
             // 
+            this.r.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.r.AutoSize = true;
             this.r.BackColor = System.Drawing.Color.White;
             this.r.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -113,6 +120,7 @@ namespace WindowsApplication
             // 
             // l
             // 
+            this.l.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.l.AutoSize = true;
             this.l.BackColor = System.Drawing.Color.White;
             this.l.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -126,6 +134,7 @@ namespace WindowsApplication
             // 
             // label1
             // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.Color.White;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -138,6 +147,7 @@ namespace WindowsApplication
             // 
             // min
             // 
+            this.min.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.min.AutoSize = true;
             this.min.BackColor = System.Drawing.Color.White;
             this.min.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -153,88 +163,12 @@ namespace WindowsApplication
             this.Panel_Video.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.Panel_Video.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.Panel_Video.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Panel_Video.Location = new System.Drawing.Point(17, 30);
             this.Panel_Video.Name = "Panel_Video";
             this.Panel_Video.Size = new System.Drawing.Size(499, 350);
             this.Panel_Video.TabIndex = 19;
-            // 
-            // BT_Play
-            // 
-            this.BT_Play.BackColor = System.Drawing.Color.Teal;
-            this.BT_Play.Enabled = false;
-            this.BT_Play.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BT_Play.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.BT_Play.ForeColor = System.Drawing.Color.White;
-            this.BT_Play.Location = new System.Drawing.Point(160, 443);
-            this.BT_Play.Name = "BT_Play";
-            this.BT_Play.Size = new System.Drawing.Size(59, 30);
-            this.BT_Play.TabIndex = 0;
-            this.BT_Play.Text = "œÎÂÈ";
-            this.BT_Play.UseVisualStyleBackColor = false;
-            this.BT_Play.Click += new System.EventHandler(this.BT_Play_Click);
-            // 
-            // BT_Pause
-            // 
-            this.BT_Pause.BackColor = System.Drawing.Color.SteelBlue;
-            this.BT_Pause.Enabled = false;
-            this.BT_Pause.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BT_Pause.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.BT_Pause.ForeColor = System.Drawing.Color.White;
-            this.BT_Pause.Location = new System.Drawing.Point(225, 443);
-            this.BT_Pause.Name = "BT_Pause";
-            this.BT_Pause.Size = new System.Drawing.Size(66, 30);
-            this.BT_Pause.TabIndex = 1;
-            this.BT_Pause.Text = "œ‡ÛÁ‡";
-            this.BT_Pause.UseVisualStyleBackColor = false;
-            this.BT_Pause.Click += new System.EventHandler(this.BT_Pause_Click);
-            // 
-            // BT_PP
-            // 
-            this.BT_PP.BackColor = System.Drawing.Color.LightSteelBlue;
-            this.BT_PP.Enabled = false;
-            this.BT_PP.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BT_PP.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.BT_PP.ForeColor = System.Drawing.Color.White;
-            this.BT_PP.Location = new System.Drawing.Point(362, 443);
-            this.BT_PP.Name = "BT_PP";
-            this.BT_PP.Size = new System.Drawing.Size(88, 30);
-            this.BT_PP.TabIndex = 5;
-            this.BT_PP.Text = "¬Ô‡‚Ó";
-            this.BT_PP.UseVisualStyleBackColor = false;
-            this.BT_PP.Visible = false;
-            this.BT_PP.Click += new System.EventHandler(this.BT_PP_Click);
-            // 
-            // BT_MM
-            // 
-            this.BT_MM.BackColor = System.Drawing.Color.LightSteelBlue;
-            this.BT_MM.Enabled = false;
-            this.BT_MM.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BT_MM.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.BT_MM.ForeColor = System.Drawing.Color.White;
-            this.BT_MM.Location = new System.Drawing.Point(72, 442);
-            this.BT_MM.Name = "BT_MM";
-            this.BT_MM.Size = new System.Drawing.Size(82, 31);
-            this.BT_MM.TabIndex = 4;
-            this.BT_MM.Text = "¬ÎÂ‚Ó";
-            this.BT_MM.UseVisualStyleBackColor = false;
-            this.BT_MM.Visible = false;
-            this.BT_MM.Click += new System.EventHandler(this.BT_MM_Click);
-            // 
-            // BT_Stop
-            // 
-            this.BT_Stop.BackColor = System.Drawing.Color.Brown;
-            this.BT_Stop.Enabled = false;
-            this.BT_Stop.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BT_Stop.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.BT_Stop.ForeColor = System.Drawing.Color.White;
-            this.BT_Stop.Location = new System.Drawing.Point(297, 443);
-            this.BT_Stop.Name = "BT_Stop";
-            this.BT_Stop.Size = new System.Drawing.Size(59, 30);
-            this.BT_Stop.TabIndex = 3;
-            this.BT_Stop.Text = "—ÚÓÔ";
-            this.BT_Stop.UseVisualStyleBackColor = false;
-            this.BT_Stop.Click += new System.EventHandler(this.BT_Stop_Click);
             // 
             // menuStrip1
             // 
@@ -283,18 +217,22 @@ namespace WindowsApplication
             // 
             // Track_AudioTrack
             // 
+            this.Track_AudioTrack.AutoSize = true;
+            this.Track_AudioTrack.Dock = System.Windows.Forms.DockStyle.Fill;
             this.Track_AudioTrack.Enabled = false;
             this.Track_AudioTrack.LargeChange = new decimal(new int[] {
-            1,
+            10,
             0,
             0,
             0});
-            this.Track_AudioTrack.Location = new System.Drawing.Point(110, 402);
+            this.Track_AudioTrack.Location = new System.Drawing.Point(0, 0);
+            this.Track_AudioTrack.Margin = new System.Windows.Forms.Padding(3, 3, 30, 3);
             this.Track_AudioTrack.Maximum = new decimal(new int[] {
             1000,
             0,
             0,
             0});
+            this.Track_AudioTrack.MaximumSize = new System.Drawing.Size(0, 17);
             this.Track_AudioTrack.Minimum = new decimal(new int[] {
             0,
             0,
@@ -320,17 +258,86 @@ namespace WindowsApplication
             this.Track_AudioTrack.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Track_AudioTreck_MouseDown);
             this.Track_AudioTrack.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Track_AudioTreck_MouseUp);
             // 
+            // panel1
+            // 
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel1.Controls.Add(this.Track_AudioTrack);
+            this.panel1.Location = new System.Drawing.Point(110, 406);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(305, 30);
+            this.panel1.TabIndex = 0;
+            // 
+            // panel2
+            // 
+            this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel2.Controls.Add(this.BT_Play);
+            this.panel2.Controls.Add(this.BT_Stop);
+            this.panel2.Controls.Add(this.BT_Pause);
+            this.panel2.Location = new System.Drawing.Point(51, 442);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(420, 31);
+            this.panel2.TabIndex = 21;
+            // 
+            // BT_Play
+            // 
+            this.BT_Play.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.BT_Play.BackColor = System.Drawing.Color.Teal;
+            this.BT_Play.Enabled = false;
+            this.BT_Play.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BT_Play.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.BT_Play.ForeColor = System.Drawing.Color.White;
+            this.BT_Play.Location = new System.Drawing.Point(107, -4);
+            this.BT_Play.Name = "BT_Play";
+            this.BT_Play.Size = new System.Drawing.Size(59, 30);
+            this.BT_Play.TabIndex = 0;
+            this.BT_Play.Text = "œÎÂÈ";
+            this.BT_Play.UseVisualStyleBackColor = false;
+            this.BT_Play.Click += new System.EventHandler(this.BT_Play_Click);
+            // 
+            // BT_Stop
+            // 
+            this.BT_Stop.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.BT_Stop.BackColor = System.Drawing.Color.Brown;
+            this.BT_Stop.Enabled = false;
+            this.BT_Stop.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BT_Stop.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.BT_Stop.ForeColor = System.Drawing.Color.White;
+            this.BT_Stop.Location = new System.Drawing.Point(244, -4);
+            this.BT_Stop.Name = "BT_Stop";
+            this.BT_Stop.Size = new System.Drawing.Size(59, 30);
+            this.BT_Stop.TabIndex = 3;
+            this.BT_Stop.Text = "—ÚÓÔ";
+            this.BT_Stop.UseVisualStyleBackColor = false;
+            this.BT_Stop.Click += new System.EventHandler(this.BT_Stop_Click);
+            // 
+            // BT_Pause
+            // 
+            this.BT_Pause.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.BT_Pause.BackColor = System.Drawing.Color.SteelBlue;
+            this.BT_Pause.Enabled = false;
+            this.BT_Pause.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BT_Pause.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.BT_Pause.ForeColor = System.Drawing.Color.White;
+            this.BT_Pause.Location = new System.Drawing.Point(172, -4);
+            this.BT_Pause.Name = "BT_Pause";
+            this.BT_Pause.Size = new System.Drawing.Size(66, 30);
+            this.BT_Pause.TabIndex = 1;
+            this.BT_Pause.Text = "œ‡ÛÁ‡";
+            this.BT_Pause.UseVisualStyleBackColor = false;
+            this.BT_Pause.Click += new System.EventHandler(this.BT_Pause_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(530, 489);
-            this.Controls.Add(this.Track_AudioTrack);
+            this.Controls.Add(this.panel2);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.Laber_TimeNow);
             this.Controls.Add(this.Laber_TimeAll);
-            this.Controls.Add(this.BT_Play);
-            this.Controls.Add(this.BT_Pause);
             this.Controls.Add(this.Panel_Video);
             this.Controls.Add(this.min);
             this.Controls.Add(this.label1);
@@ -338,9 +345,6 @@ namespace WindowsApplication
             this.Controls.Add(this.r);
             this.Controls.Add(this.Track_Volume);
             this.Controls.Add(this.Track_Balance);
-            this.Controls.Add(this.BT_PP);
-            this.Controls.Add(this.BT_MM);
-            this.Controls.Add(this.BT_Stop);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.MinimumSize = new System.Drawing.Size(538, 523);
@@ -352,17 +356,15 @@ namespace WindowsApplication
             ((System.ComponentModel.ISupportInitialize)(this.Track_Volume)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
+            this.panel2.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Button BT_Pause;
-        private System.Windows.Forms.Button BT_Stop;
-        private System.Windows.Forms.Button BT_MM;
-        private System.Windows.Forms.Button BT_PP;
         private System.Windows.Forms.TrackBar Track_Balance;
         private System.Windows.Forms.TrackBar Track_Volume;
         private System.Windows.Forms.Label Laber_TimeNow;
@@ -372,7 +374,6 @@ namespace WindowsApplication
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label min;
         private System.Windows.Forms.Panel Panel_Video;
-        private System.Windows.Forms.Button BT_Play;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem Ù‡ÈÎToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem BT_OpenFile;
@@ -380,6 +381,11 @@ namespace WindowsApplication
         private ProXoft.WinForms.ScrollBarEnhanced Track_AudioTrack;
         private System.Windows.Forms.ToolStripMenuItem ÒÓÁ‰‡Ú¸«‡ÍÎ‡‰ÍÛToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ÓÚÍ˚Ú¸œÎÂÈÎËÒÚToolStripMenuItem;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Button BT_Play;
+        private System.Windows.Forms.Button BT_Stop;
+        private System.Windows.Forms.Button BT_Pause;
     }
 }
 
