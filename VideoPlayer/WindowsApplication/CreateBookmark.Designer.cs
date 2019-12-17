@@ -75,6 +75,7 @@
             this.mtbFinish.TabIndex = 2;
             this.mtbFinish.ValidatingType = typeof(System.DateTime);
             this.mtbFinish.Enter += new System.EventHandler(this.mtb_Enter);
+            this.mtbFinish.Leave += new System.EventHandler(this.mtbFinish_Leave);
             // 
             // label1
             // 
