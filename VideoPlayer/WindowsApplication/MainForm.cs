@@ -287,11 +287,13 @@ namespace WindowsApplication
         {
             CreateBookmark FormBookmark = new CreateBookmark();
             FormBookmark.labelCurrentPosition = this.Laber_TimeNow;
+            FormBookmark.Laber_TimeAll = this.Laber_TimeAll;
             FormBookmark.dataSet = dataSet;
             FormBookmark.table = table;
             FormBookmark.Video = video;
             FormBookmark.filename = filename;
             FormBookmark.Track_AudioTrack = Track_AudioTrack;
+            
             FormBookmark.Show();
         }
 

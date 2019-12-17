@@ -13,6 +13,7 @@ namespace WindowsApplication
     public partial class CreateBookmark : Form
     {
         public Label labelCurrentPosition;
+        public Label Laber_TimeAll;
         public DataSet dataSet;
         public DataTable table;
         public Video Video;
@@ -21,14 +22,17 @@ namespace WindowsApplication
         int i = 0; // Переменная проверки
         ColorDialog MyDialog = new ColorDialog();
         public ScrollBarEnhanced Track_AudioTrack;
+        
         int StartValue;
         int FinishValue;
         SideBar.Playlist SB;
+        int AllValue;
+        string[] StartLeaveSplit;
 
         public CreateBookmark()
         {
             InitializeComponent();
-            laColor.Text = "";
+            laColor.Text = "";            
         }
 
         private void tbNameBookmark_Enter(object sender, EventArgs e)
@@ -242,6 +246,18 @@ namespace WindowsApplication
 
             StartValue = int.Parse(StartSplit[0]) * 60 + int.Parse(StartSplit[1]);
             FinishValue = int.Parse(FinishSplit[0]) * 60 + int.Parse(FinishSplit[1]);
+        }
+
+        private void mtbStart_Leave(object sender, EventArgs e)
+        {
+            //SplitSecond();
+            Тут баг StartLeaveSplit = Laber_TimeAll.Text.ToString().Split(':');
+            AllValue = int.Parse(StartLeaveSplit[0]) * 60 + int.Parse(StartLeaveSplit[1]);
+
+            if (StartValue > AllValue)
+            {
+                mtbStart.Text = Laber_TimeAll.Text;
+            }
         }
     }
 }

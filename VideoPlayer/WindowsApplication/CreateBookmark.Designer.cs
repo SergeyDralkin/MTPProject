@@ -64,6 +64,7 @@
             this.mtbStart.TabIndex = 1;
             this.mtbStart.ValidatingType = typeof(System.DateTime);
             this.mtbStart.Enter += new System.EventHandler(this.mtb_Enter);
+            this.mtbStart.Leave += new System.EventHandler(this.mtbStart_Leave);
             // 
             // mtbFinish
             // 
@@ -117,6 +118,7 @@
             // 
             // buCancel
             // 
+            this.buCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.buCancel.Location = new System.Drawing.Point(10, 126);
             this.buCancel.Name = "buCancel";
             this.buCancel.Size = new System.Drawing.Size(129, 23);
