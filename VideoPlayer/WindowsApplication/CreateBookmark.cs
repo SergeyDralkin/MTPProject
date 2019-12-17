@@ -12,22 +12,22 @@ namespace WindowsApplication
 {
     public partial class CreateBookmark : Form
     {
-        public Label labelCurrentPosition;
-        public Label Laber_TimeAll;
-        public DataSet dataSet;
-        public DataTable table;
-        public Video Video;
-        public string filename;
-        public BasicShapeScrollBarBookmark Bookmark;
+        public Label labelCurrentPosition; //label из MainForm
+        public Label Laber_TimeAll; //label из MainForm
+        public DataSet dataSet; //доступ к DataSet из MainForm
+        public DataTable table; //доступ к Table из MainForm
+        public Video Video; //доступ к Video из MainForm
+        public string filename; //доступ к имени открываемого файла из MainForm
+        public BasicShapeScrollBarBookmark Bookmark; //доступ к ScrollBar'у из MainForm для создание закладок
         int i = 0; // Переменная проверки
-        ColorDialog MyDialog = new ColorDialog();
-        public ScrollBarEnhanced Track_AudioTrack;
-        
+        ColorDialog MyDialog = new ColorDialog(); //отрытие окна с выбором цвета
+        public ScrollBarEnhanced Track_AudioTrack; //доступ к ScrollBar'у из MainForm
         int StartValue;
         int FinishValue;
         SideBar.Playlist SB;
         int AllValue;
-        string[] StartLeaveSplit;
+        string[] AllLeaveSplit;
+        string json;
 
         public CreateBookmark()
         {
@@ -67,10 +67,10 @@ namespace WindowsApplication
 
         private void buSaveBookmark_Click(object sender, EventArgs e)
         {
-
             CheckParameters();
             if (i == 0)
             {
+                Directory.CreateDirectory("JSON");
                 DataRow newRow = table.NewRow();
                 newRow["Name"] = tbNameBookmark.Text.ToString();
                 newRow["Start"] = mtbStart.Text.ToString();
@@ -80,33 +80,27 @@ namespace WindowsApplication
 
                 dataSet.AcceptChanges();
 
-                string json = JsonConvert.SerializeObject(dataSet);
+                json = JsonConvert.SerializeObject(dataSet);
 
-
-                using (FileStream fs = new FileStream(filename + "+" + Video.Duration + ".json", FileMode.Create))
-                {
-                    StreamWriter w = new StreamWriter(fs);
-                    w.WriteLine(json);
-                    w.Close();
-                    fs.Close();
-                }
+                CreateNewBookmarks();
 
                 SplitSecond();
                 Bookmark = new BasicShapeScrollBarBookmark(tbNameBookmark.Text.ToString() + "Start", StartValue, ScrollBarBookmarkAlignment.LeftOrTop, 5, 5, ScrollbarBookmarkShape.Rectangle, laColor.ForeColor, true, false, null);
                 Track_AudioTrack.Bookmarks.Add(Bookmark);
                 Bookmark = new BasicShapeScrollBarBookmark(tbNameBookmark.Text.ToString() + "Finish", FinishValue, ScrollBarBookmarkAlignment.LeftOrTop, 5, 5, ScrollbarBookmarkShape.Rectangle, laColor.ForeColor, true, false, null);
                 Track_AudioTrack.Bookmarks.Add(Bookmark);
-
                 SB = (SideBar.Playlist)Application.OpenForms["Playlist"];
-
                 if (SB == null)
                 {
                     SB = new SideBar.Playlist();
                     SB.Show();
                 }
-
                 SB.Activate();
                 SB.ReloadList(dataSet);
+            }
+            else 
+            {
+                MessageBox.Show("Поля, выделенные красным, введены не верно!");
             }
         }
         private void cbCheckedChanged(object sender, EventArgs e)
@@ -144,6 +138,7 @@ namespace WindowsApplication
         }
         void CheckParameters()
         {
+            i = 0;
             if (tbNameBookmark.Text == null || tbNameBookmark.Text == String.Empty || tbNameBookmark.Text == "Введите название закладки")
             {
                 tbNameBookmark.BackColor = Color.Red;
@@ -228,7 +223,6 @@ namespace WindowsApplication
 
         private void buColorSet_Click(object sender, EventArgs e)
         {
-
             MyDialog.AllowFullOpen = false;
             MyDialog.ShowHelp = true;
 
@@ -250,13 +244,51 @@ namespace WindowsApplication
 
         private void mtbStart_Leave(object sender, EventArgs e)
         {
-            //SplitSecond();
-            StartLeaveSplit = Laber_TimeAll.Text.ToString().Split(':');
-            AllValue = int.Parse(StartLeaveSplit[0]) * 60 + int.Parse(StartLeaveSplit[1]);
-
-            if (StartValue > AllValue)
+            string[] StartSplit = mtbStart.Text.ToString().Split(':');
+            if (StartSplit[0] == "  " || StartSplit[1] == "")
             {
-                mtbStart.Text = Laber_TimeAll.Text;
+                return;
+            }
+            else 
+            {
+                StartValue = int.Parse(StartSplit[0]) * 60 + int.Parse(StartSplit[1]);                                
+                AllLeaveSplit = Laber_TimeAll.Text.ToString().Split(':');
+                AllValue = int.Parse(AllLeaveSplit[0]) * 60 + int.Parse(AllLeaveSplit[1]);
+
+                if (StartValue > AllValue)
+                {
+                    mtbStart.Text = Laber_TimeAll.Text;
+                }                
+            }            
+        }
+
+        private void mtbFinish_Leave(object sender, EventArgs e)
+        {
+            string[] FinishSplit = mtbFinish.Text.ToString().Split(':');
+            if (FinishSplit[0] == "  " || FinishSplit[1] == "")
+            {
+                return;
+            }
+            else
+            {
+                FinishValue = int.Parse(FinishSplit[0]) * 60 + int.Parse(FinishSplit[1]);
+                AllLeaveSplit = Laber_TimeAll.Text.ToString().Split(':');
+                AllValue = int.Parse(AllLeaveSplit[0]) * 60 + int.Parse(AllLeaveSplit[1]);
+
+                if (FinishValue > AllValue)
+                {
+                    mtbFinish.Text = Laber_TimeAll.Text;
+                }
+            }
+        }
+        public void CreateNewBookmarks()
+        {
+            using (FileStream fs = new FileStream("JSON/" + filename + "+" + Video.Duration + ".json", FileMode.Create))
+            {
+                StreamWriter w = new StreamWriter(fs);
+                w.WriteLine(json);
+                w.Close();
+                fs.Close();
             }
         }
     }
