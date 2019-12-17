@@ -352,6 +352,7 @@ namespace WindowsApplication
             this.ShowIcon = false;
             this.Text = "Player";
             this.SizeChanged += new System.EventHandler(this.Form1_SizeChanged);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.MainForm_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.Track_Balance)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Track_Volume)).EndInit();
             this.menuStrip1.ResumeLayout(false);

@@ -24,13 +24,11 @@ namespace WindowsApplication
 
         DataSet dataSet = new DataSet("dataSet");
         DataTable table = new DataTable();
-        BasicShapeScrollBarBookmark Bookmark = new BasicShapeScrollBarBookmark();
-        //public ;
+        BasicShapeScrollBarBookmark Bookmark = new BasicShapeScrollBarBookmark();        
 
         public MainForm()
         {
-            InitializeComponent();
-                
+            InitializeComponent();                
             //
             //dataset
             //
@@ -91,8 +89,7 @@ namespace WindowsApplication
         //Звук
         //
         private void Track_Volume_Scroll(object sender, EventArgs e)
-        {
-            
+        {            
             if ( Track_Volume.Value == 100)
             {
                 video.Audio.Volume = 0;
@@ -151,34 +148,16 @@ namespace WindowsApplication
         {
             if ( WindowState == FormWindowState.Maximized)
             {
-                 Panel_Video.Size = new Size(Size.Width - 18, Size.Height - 168);                 
-                 Panel_Video.Location = new Point(0,24);
-                 //Track_AudioTrack.Location = new Point(5,0);
-                 //Track_AudioTrack.Size = new Size( Size.Width-15,45);
-                 label1.Visible = false;                
-                 r.Visible = false;                
-                 BT_OpenFile.Visible = false;
-                 BT_Play.Visible = false;
-                 BT_Pause.Visible = false;
-                 Laber_TimeAll.Visible = false;
-                 Laber_TimeNow.Visible = false;
-                 Track_AudioTrack.Visible = false;
+                Panel_Video.Size = new Size(Size.Width - 18, Size.Height - 168);                 
+                Panel_Video.Location = new Point(0,24);                
             }
 
             if ( WindowState == FormWindowState.Normal)
             {
-                 Panel_Video.Size = new Size( Size.Width - 38, Size.Height -168);
-                 Panel_Video.Location = new Point(17,30);
-                 Track_AudioTrack.Location = new Point(102, 400);
-                 Track_AudioTrack.Size = new Size(313,23);
-                 label1.Visible = true;                
-                 r.Visible = true;                
-                 BT_OpenFile.Visible = true;
-                 BT_Play.Visible = true;
-                 BT_Pause.Visible = true;
-                 Laber_TimeAll.Visible = true;
-                 Laber_TimeNow.Visible = true;
-                 Track_AudioTrack.Visible = true;
+                Panel_Video.Size = new Size( Size.Width - 38, Size.Height -168);
+                Panel_Video.Location = new Point(17,30);
+                Track_AudioTrack.Location = new Point(102, 400);
+                Track_AudioTrack.Size = new Size(313,23);                
             }
         }
 
@@ -302,6 +281,13 @@ namespace WindowsApplication
                 audio.Volume = ((100 - Track_Volume.Value) * (-100));
             }
             BT_Play_Click(null, null);
+        }
+        private void MainForm_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Space)
+            {
+                BT_Pause_Click(null, null);
+            }
         }
     }
 }
