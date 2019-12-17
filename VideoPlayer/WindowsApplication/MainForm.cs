@@ -189,24 +189,14 @@ namespace WindowsApplication
         {
             //
             //Диалог выбора файла
-            //
-
-            
-
+            //     
             var dialog = new OpenFileDialog();
             dialog.Title = "Открыть файл";
             dialog.Filter = "Видео файлы (*.avi; *.mp4; *.qt; *.mov; *.mpg; *.mpeg; *.m1v; *.wmv)|*.avi; *.mp4; *.qt; *.mov; *.mpg; *.mpeg; *.m1v; *.wmv|Все файлы (*.*)|*.*";
             if (dialog.ShowDialog() == DialogResult.OK)
             {
-                //int height = Panel_Video.Height;
-                //int width = Panel_Video.Width;
-
-
-
-
                 LoadVideo(dialog.FileName);
             }
-
         }
 
         //
@@ -262,8 +252,7 @@ namespace WindowsApplication
             FormBookmark.table = table;
             FormBookmark.Video = video;
             FormBookmark.filename = filename;
-            FormBookmark.Track_AudioTrack = Track_AudioTrack;
-            
+            FormBookmark.Track_AudioTrack = Track_AudioTrack;            
             FormBookmark.Show();
         }
 
@@ -282,11 +271,9 @@ namespace WindowsApplication
             }
             video = new Video(path);
             audio = new Audio(path);
-            video.Owner = Panel_Video;
-            BT_MM.Enabled = true;
+            video.Owner = Panel_Video;            
             BT_Pause.Enabled = true;
-            BT_Play.Enabled = true;
-            BT_PP.Enabled = true;
+            BT_Play.Enabled = true;            
             BT_Stop.Enabled = true;
             Track_AudioTrack.Enabled = true;
             Track_Balance.Enabled = true;
