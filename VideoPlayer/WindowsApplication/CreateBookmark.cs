@@ -251,7 +251,7 @@ namespace WindowsApplication
         private void mtbStart_Leave(object sender, EventArgs e)
         {
             //SplitSecond();
-            Тут баг StartLeaveSplit = Laber_TimeAll.Text.ToString().Split(':');
+            StartLeaveSplit = Laber_TimeAll.Text.ToString().Split(':');
             AllValue = int.Parse(StartLeaveSplit[0]) * 60 + int.Parse(StartLeaveSplit[1]);
 
             if (StartValue > AllValue)
