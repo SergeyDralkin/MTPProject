@@ -14,7 +14,8 @@ namespace SideBar
     public partial class Playlist : Form
     {
         DataTable dataTable;
-
+        List<string> videoPath = new List<string>();
+        WindowsApplication.MainForm MF;
 
 
         public Playlist()
@@ -29,6 +30,7 @@ namespace SideBar
             dialog.Filter = "Видео файлы (*.avi; *.qt; *.mov; *.mpg; *.mpeg; *.m1v; *.wmv)|*.avi; *.qt; *.mov; *.mpg; *.mpeg; *.m1v; *.wmv|Все файлы (*.*)|*.*";
             if (dialog.ShowDialog() == DialogResult.OK)
                 lbPlaylist.Items.Add(Path.GetFileNameWithoutExtension(dialog.FileName));
+            videoPath.Add(dialog.FileName);
         }
 
         private void buSave_Click(object sender, EventArgs e)
@@ -69,6 +71,16 @@ namespace SideBar
 
             string json = JsonConvert.SerializeObject(dataTable);
 
+
+            /*
+            using (FileStream fs = new FileStream("JSON/" + filename + "+" + Video_Duration + ".json", FileMode.Create))
+            {
+                StreamWriter w = new StreamWriter(fs);
+                w.WriteLine(js);
+                w.Close();
+                fs.Close();
+            }
+            */
         }
 
 
@@ -88,6 +100,19 @@ namespace SideBar
                 lvadd.SubItems.Add(Convert.ToString(row["Color"]));
                 list.Items.Add(lvadd);
             }
+        }
+
+        private void lbPlaylist_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            int index = this.lbPlaylist.IndexFromPoint(e.Location);
+            if (index != System.Windows.Forms.ListBox.NoMatches)
+            {
+                MF = (WindowsApplication.MainForm)Application.OpenForms["MainForm"];
+                MF.Activate();
+                MF.LoadVideo(videoPath[index].ToString());
+            }
+
+            
         }
     }
 
