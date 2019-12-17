@@ -9,6 +9,7 @@ using System.Data;
 using Newtonsoft.Json;
 using SideBar;
 
+
 namespace WindowsApplication
 {
     public partial class MainForm : Form
@@ -21,7 +22,7 @@ namespace WindowsApplication
         Video video;
         Audio audio;
         string filename;
-
+        SideBar.Playlist SB;
         DataSet dataSet = new DataSet("dataSet");
         DataTable table = new DataTable();
         BasicShapeScrollBarBookmark Bookmark = new BasicShapeScrollBarBookmark();
@@ -302,6 +303,18 @@ namespace WindowsApplication
                 audio.Volume = ((100 - Track_Volume.Value) * (-100));
             }
             BT_Play_Click(null, null);
+
+            if (File.Exists("JSON /" + filename + "+" + video.Duration + ".json"))
+            {
+                SB = (SideBar.Playlist)Application.OpenForms["Playlist"];
+                if (SB == null)
+                {
+                    SB = new SideBar.Playlist();
+                    SB.Show();
+                }
+                DataSet dataSet = JsonConvert.DeserializeObject<DataSet>(File.ReadAllText("JSON /" + filename + "+" + video.Duration + ".json"));
+                SB.ReloadList(dataSet);
+            }
         }
     }
 }

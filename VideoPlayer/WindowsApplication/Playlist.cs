@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using System.IO;
 using Newtonsoft.Json;
 
+
 namespace SideBar
 {
     public partial class Playlist : Form
@@ -110,6 +111,7 @@ namespace SideBar
                 MF = (WindowsApplication.MainForm)Application.OpenForms["MainForm"];
                 MF.Activate();
                 MF.LoadVideo(videoPath[index].ToString());
+
             }
 
             
