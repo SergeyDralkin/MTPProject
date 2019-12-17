@@ -13,6 +13,10 @@ namespace SideBar
 {
     public partial class Playlist : Form
     {
+        DataTable dataTable;
+
+
+
         public Playlist()
         {
             InitializeComponent();
@@ -54,27 +58,37 @@ namespace SideBar
 
         private void buDel_Click(object sender, EventArgs e)
         {
-            lv.Items.Remove(lv.SelectedItems[0]); 
+            foreach (DataRow row in dataTable.Rows)
+            {
+                if (Convert.ToString(row["Name"]) == lv.SelectedItems[0].Text)
+                {
+                    row.Delete();
+                }
+            }
+            lv.Items.Remove(lv.SelectedItems[0]);
+
+            string json = JsonConvert.SerializeObject(dataTable);
+
         }
 
 
         public void ReloadList(DataSet Videolist) 
         {
-            
-            DataTable dataTable = Videolist.Tables[0];
+
+            dataTable = Videolist.Tables[0];
             var list = lv;
             ListViewItem lvadd;
+            //list.Items.Clear();
             foreach (DataRow row in dataTable.Rows)
             {
+
                 lvadd = new ListViewItem(Convert.ToString(row["Name"]));
                 lvadd.SubItems.Add(Convert.ToString(row["Start"]));
                 lvadd.SubItems.Add(Convert.ToString(row["Finish"]));
                 lvadd.SubItems.Add(Convert.ToString(row["Color"]));
                 list.Items.Add(lvadd);
             }
-            
         }
-
     }
 
     public class Bookmark
