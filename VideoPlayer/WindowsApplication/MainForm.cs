@@ -20,9 +20,9 @@ namespace WindowsApplication
         //
         string[] files = new string[0];
         EX.VideoPlayer player = new EX.VideoPlayer();
-        Video video;
+        public Video video;
         Audio audio;
-        string filename;
+        public string filename;
         SideBar.Playlist SB;
         DataSet dataSet = new DataSet("dataSet");
         DataTable table = new DataTable();
@@ -36,7 +36,7 @@ namespace WindowsApplication
             //dataset
             //
             dataSet.Namespace = "Boormarks";
-            DataColumn Name = new DataColumn("name");
+            DataColumn Name = new DataColumn("Name");
             DataColumn Start = new DataColumn("Start");
             DataColumn Finish = new DataColumn("Finish");
             DataColumn ColorMark = new DataColumn("Color");
@@ -287,42 +287,11 @@ namespace WindowsApplication
             BT_Play_Click(null, null);
 
             ÒÓÁ‰‡Ú¸«‡ÍÎ‡‰ÍÛToolStripMenuItem.Enabled = true;
+            Track_AudioTrack.Bookmarks.Clear();
 
             if (File.Exists("JSON /" + filename + "+" + video.Duration + ".json"))
             {
-                SB = (SideBar.Playlist)Application.OpenForms["Playlist"];
-                if (SB == null)
-                {
-                    SB = new SideBar.Playlist();
-                    SB.Show();
-                }
-                dataSet = JsonConvert.DeserializeObject<DataSet>(File.ReadAllText("JSON /" + filename + "+" + video.Duration + ".json"));
-
-                DataTable dataTable = dataSet.Tables[0];
-                ColorConverter converter = new ColorConverter();
-
-                foreach (DataRow row in dataTable.Rows)
-                {
-                    
-                    Color cl = new Color();
-                    cl = Color.FromName(Convert.ToString(row["Color"]));
-                    if (cl.R == 0 && cl.R == 0 && cl.R == 0 && cl.Name !="Black")
-                        cl = (Color)converter.ConvertFromInvariantString("#" + Convert.ToString(row["Color"]));
-
-                    DateTime dt = new DateTime();
-               
-                    dt = Convert.ToDateTime("00:"+row["Start"]);
-
-
-                    Bookmark = new BasicShapeScrollBarBookmark(Convert.ToString(row["Name"]) + "Start", dt.Second, ScrollBarBookmarkAlignment.LeftOrTop, 5, 5, ScrollbarBookmarkShape.Rectangle, cl, true, false, null);
-                    Track_AudioTrack.Bookmarks.Add(Bookmark);
-
-                    dt = Convert.ToDateTime("00:" + row["Finish"]);
-                    Bookmark = new BasicShapeScrollBarBookmark(Convert.ToString(row["Name"]) + "Finish", dt.Second, ScrollBarBookmarkAlignment.LeftOrTop, 5, 5, ScrollbarBookmarkShape.Rectangle, cl, true, false, null);
-                    Track_AudioTrack.Bookmarks.Add(Bookmark);
-                    
-                }
-                
+                Reload_Bookmarks();
                 SB.ReloadList(dataSet);
             }
         }
@@ -332,6 +301,44 @@ namespace WindowsApplication
             {
                 BT_Pause_Click(null, null);
             }
+        }
+        public void Reload_Bookmarks()
+        {
+            SB = (SideBar.Playlist)Application.OpenForms["Playlist"];
+            if (SB == null)
+            {
+                SB = new SideBar.Playlist();
+                SB.Show();
+            }
+
+            dataSet = JsonConvert.DeserializeObject<DataSet>(File.ReadAllText("JSON /" + filename + "+" + video.Duration + ".json"));
+
+            DataTable dataTable = dataSet.Tables[0];
+            ColorConverter converter = new ColorConverter();
+            Track_AudioTrack.Bookmarks.Clear();
+
+            foreach (DataRow row in dataTable.Rows)
+            {
+
+                Color cl = new Color();
+                cl = Color.FromName(Convert.ToString(row["Color"]));
+                if (cl.R == 0 && cl.G == 0 && cl.B == 0 && cl.Name != "Black")
+                    cl = (Color)converter.ConvertFromInvariantString("#" + Convert.ToString(row["Color"]));
+
+                DateTime dt = new DateTime();
+
+                dt = Convert.ToDateTime("00:" + row["Start"]);
+
+
+                Bookmark = new BasicShapeScrollBarBookmark(Convert.ToString(row["Name"]) + "Start", dt.Second, ScrollBarBookmarkAlignment.LeftOrTop, 5, 5, ScrollbarBookmarkShape.Rectangle, cl, true, false, null);
+                Track_AudioTrack.Bookmarks.Add(Bookmark);
+
+                dt = Convert.ToDateTime("00:" + row["Finish"]);
+                Bookmark = new BasicShapeScrollBarBookmark(Convert.ToString(row["Name"]) + "Finish", dt.Second, ScrollBarBookmarkAlignment.LeftOrTop, 5, 5, ScrollbarBookmarkShape.Rectangle, cl, true, false, null);
+                Track_AudioTrack.Bookmarks.Add(Bookmark);
+
+            }
+
         }
 
         private void Track_AudioTrack_Move(object sender, EventArgs e)

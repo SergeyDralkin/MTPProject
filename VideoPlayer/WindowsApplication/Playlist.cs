@@ -8,13 +8,14 @@ using System.Text;
 using System.Windows.Forms;
 using System.IO;
 using Newtonsoft.Json;
+using WindowsApplication;
 
 
 namespace SideBar
 {
     public partial class Playlist : Form
     {
-        DataTable dataTable;
+        DataSet dataSet;
         List<string> videoPath = new List<string>();
         WindowsApplication.MainForm MF;
 
@@ -28,7 +29,7 @@ namespace SideBar
         {
             var dialog = new OpenFileDialog();
             dialog.Title = "Открыть файл";
-            dialog.Filter = "Видео файлы (*.avi; *.qt; *.mov; *.mpg; *.mpeg; *.m1v; *.wmv)|*.avi; *.qt; *.mov; *.mpg; *.mpeg; *.m1v; *.wmv|Все файлы (*.*)|*.*";
+            dialog.Filter = "Видео файлы (*.avi; *.mp4; *.qt; *.mov; *.mpg; *.mpeg; *.m1v; *.wmv)|*.avi; *.mp4; *.qt; *.mov; *.mpg; *.mpeg; *.m1v; *.wmv|Все файлы (*.*)|*.*";
             if (dialog.ShowDialog() == DialogResult.OK)
                 lbPlaylist.Items.Add(Path.GetFileNameWithoutExtension(dialog.FileName));
             videoPath.Add(dialog.FileName);
@@ -61,38 +62,43 @@ namespace SideBar
 
         private void buDel_Click(object sender, EventArgs e)
         {
-            foreach (DataRow row in dataTable.Rows)
+            foreach (DataRow row in dataSet.Tables[0].Rows)
             {
                 if (Convert.ToString(row["Name"]) == lv.SelectedItems[0].Text)
                 {
                     row.Delete();
+                    dataSet.AcceptChanges();
+                    break;
                 }
             }
             lv.Items.Remove(lv.SelectedItems[0]);
 
-            string json = JsonConvert.SerializeObject(dataTable);
+           
+            string json = JsonConvert.SerializeObject(dataSet);
 
 
-            /*
-            using (FileStream fs = new FileStream("JSON/" + filename + "+" + Video_Duration + ".json", FileMode.Create))
+            MF = (WindowsApplication.MainForm)Application.OpenForms["MainForm"];
+            using (FileStream fs = new FileStream("JSON/" + MF.filename + "+" + MF.video.Duration + ".json", FileMode.Create))
             {
-                StreamWriter w = new StreamWriter(fs);
-                w.WriteLine(js);
-                w.Close();
-                fs.Close();
-            }
-            */
+                    StreamWriter w = new StreamWriter(fs);
+                    w.WriteLine(json);
+                    w.Close();
+                    fs.Close();
+                }
+
+            MF.Reload_Bookmarks();
+
         }
 
 
         public void ReloadList(DataSet Videolist) 
         {
 
-            dataTable = Videolist.Tables[0];
+            dataSet = Videolist;
             var list = lv;
             ListViewItem lvadd;
             list.Items.Clear();
-            foreach (DataRow row in dataTable.Rows)
+            foreach (DataRow row in Videolist.Tables[0].Rows)
             {
 
                 lvadd = new ListViewItem(Convert.ToString(row["Name"]));

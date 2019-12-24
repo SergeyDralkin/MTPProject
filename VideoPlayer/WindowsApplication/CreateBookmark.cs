@@ -71,6 +71,13 @@ namespace WindowsApplication
             if (i == 0)
             {
                 Directory.CreateDirectory("JSON");
+                if (dataSet.Tables[0].Columns.Count == 0)
+                {
+                    dataSet.Tables[0].Columns.Add("Name");
+                    dataSet.Tables[0].Columns.Add("Start");
+                    dataSet.Tables[0].Columns.Add("Finish");
+                    dataSet.Tables[0].Columns.Add("Color");
+                }
                 DataRow newRow = dataSet.Tables[0].NewRow();
                 newRow["Name"] = tbNameBookmark.Text.ToString();
                 newRow["Start"] = mtbStart.Text.ToString();
@@ -85,6 +92,7 @@ namespace WindowsApplication
                 json = JsonConvert.SerializeObject(dataSet);
 
                 CreateNewBookmarks(json);
+
 
                 SplitSecond();
                 Bookmark = new BasicShapeScrollBarBookmark(tbNameBookmark.Text.ToString() + "Start", StartValue, ScrollBarBookmarkAlignment.LeftOrTop, 5, 5, ScrollbarBookmarkShape.Rectangle, laColor.ForeColor, true, false, null);
