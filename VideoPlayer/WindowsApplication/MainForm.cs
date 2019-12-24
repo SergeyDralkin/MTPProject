@@ -25,15 +25,16 @@ namespace WindowsApplication
         SideBar.Playlist SB;
         DataSet dataSet = new DataSet("dataSet");
         DataTable table = new DataTable();
-        BasicShapeScrollBarBookmark Bookmark = new BasicShapeScrollBarBookmark();        
+        BasicShapeScrollBarBookmark Bookmark = new BasicShapeScrollBarBookmark();
+        ToolTip t = new ToolTip();
 
         public MainForm()
         {
-            InitializeComponent();                
+            InitializeComponent();
             //
             //dataset
             //
-            dataSet.Namespace = "Boormarks";   
+            dataSet.Namespace = "Boormarks";
             DataColumn Name = new DataColumn("name");
             DataColumn Start = new DataColumn("Start");
             DataColumn Finish = new DataColumn("Finish");
@@ -43,14 +44,15 @@ namespace WindowsApplication
             table.Columns.Add(Finish);
             table.Columns.Add(ColorMark);
             dataSet.Tables.Add(table);
+            создатьЗакладкуToolStripMenuItem.Enabled = false;
         }
-        
+
         //
         //Играть
         //
         private void BT_Play_Click(object sender, EventArgs e)
         {
-            video.Play();            
+            video.Play();
         }
 
         //
@@ -85,37 +87,37 @@ namespace WindowsApplication
         {
             if ((video.StopPosition / 1000000) > (video.CurrentPosition + 5)) video.CurrentPosition += 5;
         }
-            
+
         //
         //Звук
         //
         private void Track_Volume_Scroll(object sender, EventArgs e)
-        {            
-            if ( Track_Volume.Value == 100)
+        {
+            if (Track_Volume.Value == 100)
             {
                 video.Audio.Volume = 0;
             }
             else
             {
-                video.Audio.Volume = ((100 -  Track_Volume.Value) * (-100));
+                video.Audio.Volume = ((100 - Track_Volume.Value) * (-100));
             }
-        } 
+        }
 
         //
         //Баланс звука L:R [-10000:10000]
         //
         private void Track_Balance_Scroll(object sender, EventArgs e)
         {
-            video.Audio.Balance = (( Track_Balance.Value - 10) * 1000);
+            video.Audio.Balance = ((Track_Balance.Value - 10) * 1000);
         }
-               
+
         //
         //Звук на правый динамик
         //
         private void r_MouseClick(object sender, MouseEventArgs e)
         {
             if (filename == null) return;
-             Track_Balance.Value = 20;
+            Track_Balance.Value = 20;
             video.Audio.Balance = 10000;
         }
 
@@ -125,7 +127,7 @@ namespace WindowsApplication
         private void l_Click(object sender, EventArgs e)
         {
             if (filename == null) return;
-             Track_Balance.Value = 0;
+            Track_Balance.Value = 0;
             video.Audio.Balance = -10000;
         }
 
@@ -141,24 +143,24 @@ namespace WindowsApplication
                 video.Audio.Balance = 0;
             }
         }
-        
+
         //
         //Изменение размеров окна
         //
         private void Form1_SizeChanged(object sender, EventArgs e)
         {
-            if ( WindowState == FormWindowState.Maximized)
+            if (WindowState == FormWindowState.Maximized)
             {
-                Panel_Video.Size = new Size(Size.Width - 18, Size.Height - 168);                 
-                Panel_Video.Location = new Point(0,24);                
+                Panel_Video.Size = new Size(Size.Width - 18, Size.Height - 168);
+                Panel_Video.Location = new Point(0, 24);
             }
 
-            if ( WindowState == FormWindowState.Normal)
+            if (WindowState == FormWindowState.Normal)
             {
-                Panel_Video.Size = new Size( Size.Width - 38, Size.Height -168);
-                Panel_Video.Location = new Point(17,30);
+                Panel_Video.Size = new Size(Size.Width - 53, Size.Height - 168);
+                Panel_Video.Location = new Point(17, 30);
                 Track_AudioTrack.Location = new Point(102, 400);
-                Track_AudioTrack.Size = new Size(313,23);                
+                Track_AudioTrack.Size = new Size(313, 23);
             }
         }
 
@@ -184,16 +186,16 @@ namespace WindowsApplication
         //
         private void Timer_Tick(object sender, EventArgs e)
         {
-             Track_AudioTrack.Value = Convert.ToInt32(video.CurrentPosition);
-             Laber_TimeNow.Text = String.Format("{0:00}:{1:00}", Math.Floor(video.CurrentPosition / 60), video.CurrentPosition % 60);
+            Track_AudioTrack.Value = Convert.ToInt32(video.CurrentPosition);
+            Laber_TimeNow.Text = String.Format("{0:00}:{1:00}", Math.Floor(video.CurrentPosition / 60), video.CurrentPosition % 60);
         }
 
         //
         //Навигация по треку
         //
         private void Track_AudioTreck_Scroll(object sender, ProXoft.WinForms.EnhancedScrollEventArgs e)
-        {            
-            video.CurrentPosition = (double)Track_AudioTrack.Value;           
+        {
+            video.CurrentPosition = (double)Track_AudioTrack.Value;
         }
 
         //
@@ -232,7 +234,7 @@ namespace WindowsApplication
             FormBookmark.table = table;
             FormBookmark.Video = video;
             FormBookmark.filename = filename;
-            FormBookmark.Track_AudioTrack = Track_AudioTrack;            
+            FormBookmark.Track_AudioTrack = Track_AudioTrack;
             FormBookmark.Show();
         }
 
@@ -251,9 +253,9 @@ namespace WindowsApplication
             }
             video = new Video(path);
             audio = new Audio(path);
-            video.Owner = Panel_Video;            
+            video.Owner = Panel_Video;
             BT_Pause.Enabled = true;
-            BT_Play.Enabled = true;            
+            BT_Play.Enabled = true;
             BT_Stop.Enabled = true;
             Track_AudioTrack.Enabled = true;
             Track_Balance.Enabled = true;
@@ -272,7 +274,7 @@ namespace WindowsApplication
             video.Owner = Panel_Video;
             Track_AudioTrack.Maximum = Convert.ToInt32(video.StopPosition / 10000000);
             Laber_TimeAll.Text = String.Format("{0:00}:{1:00}", Math.Floor(Track_AudioTrack.Maximum / 60), Track_AudioTrack.Maximum % 60);
-            Panel_Video.Size = new Size(Size.Width - 38, Size.Height - 168);
+            Panel_Video.Size = new Size(Size.Width - 53, Size.Height - 168);
             if (Track_Volume.Value == 100)
             {
                 audio.Volume = 0;
@@ -282,6 +284,8 @@ namespace WindowsApplication
                 audio.Volume = ((100 - Track_Volume.Value) * (-100));
             }
             BT_Play_Click(null, null);
+
+            создатьЗакладкуToolStripMenuItem.Enabled = true;
 
             if (File.Exists("JSON /" + filename + "+" + video.Duration + ".json"))
             {
@@ -301,6 +305,16 @@ namespace WindowsApplication
             {
                 BT_Pause_Click(null, null);
             }
+        }
+
+        private void Track_AudioTrack_Move(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void Track_AudioTrack_MouseMove(object sender, EnhancedMouseEventArgs e)
+        {
+            t.Show("тут должна быть подсказка", Track_AudioTrack);
         }
     }
 }
