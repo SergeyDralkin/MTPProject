@@ -289,11 +289,21 @@ namespace WindowsApplication
             ÒÓÁ‰‡Ú¸«‡ÍÎ‡‰ÍÛToolStripMenuItem.Enabled = true;
             Track_AudioTrack.Bookmarks.Clear();
 
+            SB = (SideBar.Playlist)Application.OpenForms["Playlist"];
+            if (SB == null)
+            {
+                SB = new SideBar.Playlist();
+                SB.Show();
+            }
+            SB.ClearList();
             if (File.Exists("JSON /" + filename + "+" + video.Duration + ".json"))
             {
+
                 Reload_Bookmarks();
                 SB.ReloadList(dataSet);
+
             }
+            
         }
         private void MainForm_KeyDown(object sender, KeyEventArgs e)
         {
@@ -304,12 +314,6 @@ namespace WindowsApplication
         }
         public void Reload_Bookmarks()
         {
-            SB = (SideBar.Playlist)Application.OpenForms["Playlist"];
-            if (SB == null)
-            {
-                SB = new SideBar.Playlist();
-                SB.Show();
-            }
 
             dataSet = JsonConvert.DeserializeObject<DataSet>(File.ReadAllText("JSON /" + filename + "+" + video.Duration + ".json"));
 

@@ -95,18 +95,24 @@ namespace SideBar
         {
 
             dataSet = Videolist;
-            var list = lv;
-            ListViewItem lvadd;
-            list.Items.Clear();
+            
             foreach (DataRow row in Videolist.Tables[0].Rows)
             {
-
+                var list = lv;
+                ClearList();
+                ListViewItem lvadd;
                 lvadd = new ListViewItem(Convert.ToString(row["Name"]));
                 lvadd.SubItems.Add(Convert.ToString(row["Start"]));
                 lvadd.SubItems.Add(Convert.ToString(row["Finish"]));
                 lvadd.SubItems.Add(Convert.ToString(row["Color"]));
                 list.Items.Add(lvadd);
             }
+
+        }
+        public void ClearList()
+        {
+            lv.Items.Clear();
+            
         }
 
         private void lbPlaylist_MouseDoubleClick(object sender, MouseEventArgs e)
