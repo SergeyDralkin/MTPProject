@@ -5,7 +5,8 @@ using System.IO;
 using Microsoft.DirectX.AudioVideoPlayback;
 using ProXoft.WinForms;
 using System.Data;
-
+using System.Windows.Media;
+using System.ComponentModel;
 using Newtonsoft.Json;
 using SideBar;
 
@@ -291,7 +292,33 @@ namespace WindowsApplication
                     SB = new SideBar.Playlist();
                     SB.Show();
                 }
-                DataSet dataSet = JsonConvert.DeserializeObject<DataSet>(File.ReadAllText("JSON /" + filename + "+" + video.Duration + ".json"));
+                dataSet = JsonConvert.DeserializeObject<DataSet>(File.ReadAllText("JSON /" + filename + "+" + video.Duration + ".json"));
+
+                DataTable dataTable = dataSet.Tables[0];
+                ColorConverter converter = new ColorConverter();
+
+                foreach (DataRow row in dataTable.Rows)
+                {
+                    
+                    Color cl = new Color();
+                    cl = Color.FromName(Convert.ToString(row["Color"]));
+                    if (cl.R == 0 && cl.R == 0 && cl.R == 0 && cl.Name !="Black")
+                        cl = (Color)converter.ConvertFromInvariantString("#" + Convert.ToString(row["Color"]));
+
+                    DateTime dt = new DateTime();
+               
+                    dt = Convert.ToDateTime("00:"+row["Start"]);
+
+
+                    Bookmark = new BasicShapeScrollBarBookmark(Convert.ToString(row["Name"]) + "Start", dt.Second, ScrollBarBookmarkAlignment.LeftOrTop, 5, 5, ScrollbarBookmarkShape.Rectangle, cl, true, false, null);
+                    Track_AudioTrack.Bookmarks.Add(Bookmark);
+
+                    dt = Convert.ToDateTime("00:" + row["Finish"]);
+                    Bookmark = new BasicShapeScrollBarBookmark(Convert.ToString(row["Name"]) + "Finish", dt.Second, ScrollBarBookmarkAlignment.LeftOrTop, 5, 5, ScrollbarBookmarkShape.Rectangle, cl, true, false, null);
+                    Track_AudioTrack.Bookmarks.Add(Bookmark);
+                    
+                }
+                
                 SB.ReloadList(dataSet);
             }
         }

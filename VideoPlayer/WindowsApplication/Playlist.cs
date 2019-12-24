@@ -91,7 +91,7 @@ namespace SideBar
             dataTable = Videolist.Tables[0];
             var list = lv;
             ListViewItem lvadd;
-            //list.Items.Clear();
+            list.Items.Clear();
             foreach (DataRow row in dataTable.Rows)
             {
 

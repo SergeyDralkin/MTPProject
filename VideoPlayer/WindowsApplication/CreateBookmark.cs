@@ -71,12 +71,14 @@ namespace WindowsApplication
             if (i == 0)
             {
                 Directory.CreateDirectory("JSON");
-                DataRow newRow = table.NewRow();
+                DataRow newRow = dataSet.Tables[0].NewRow();
                 newRow["Name"] = tbNameBookmark.Text.ToString();
                 newRow["Start"] = mtbStart.Text.ToString();
                 newRow["Finish"] = mtbFinish.Text.ToString();
                 newRow["Color"] = laColor.Text.ToString();
-                table.Rows.Add(newRow);
+                dataSet.Tables[0].Rows.Add(newRow);
+
+
 
                 dataSet.AcceptChanges();
 
@@ -291,5 +293,6 @@ namespace WindowsApplication
                 fs.Close();
             }
         }
+
     }
 }
