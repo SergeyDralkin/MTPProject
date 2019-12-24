@@ -160,9 +160,6 @@ namespace WindowsApplication
             // 
             // Panel_Video
             // 
-            this.Panel_Video.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.Panel_Video.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.Panel_Video.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Panel_Video.Location = new System.Drawing.Point(17, 30);
@@ -254,6 +251,7 @@ namespace WindowsApplication
             0,
             0});
             this.Track_AudioTrack.MouseClick += new System.EventHandler<ProXoft.WinForms.EnhancedMouseEventArgs>(this.Track_AudioTreck_MouseClick);
+            this.Track_AudioTrack.MouseMove += new System.EventHandler<ProXoft.WinForms.EnhancedMouseEventArgs>(this.Track_AudioTrack_MouseMove);
             this.Track_AudioTrack.Scroll += new System.EventHandler<ProXoft.WinForms.EnhancedScrollEventArgs>(this.Track_AudioTreck_Scroll);
             this.Track_AudioTrack.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Track_AudioTreck_MouseDown);
             this.Track_AudioTrack.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Track_AudioTreck_MouseUp);
