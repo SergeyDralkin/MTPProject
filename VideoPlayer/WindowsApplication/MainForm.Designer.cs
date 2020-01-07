@@ -251,7 +251,6 @@ namespace WindowsApplication
             0,
             0});
             this.Track_AudioTrack.MouseClick += new System.EventHandler<ProXoft.WinForms.EnhancedMouseEventArgs>(this.Track_AudioTreck_MouseClick);
-            this.Track_AudioTrack.MouseMove += new System.EventHandler<ProXoft.WinForms.EnhancedMouseEventArgs>(this.Track_AudioTrack_MouseMove);
             this.Track_AudioTrack.Scroll += new System.EventHandler<ProXoft.WinForms.EnhancedScrollEventArgs>(this.Track_AudioTreck_Scroll);
             this.Track_AudioTrack.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Track_AudioTreck_MouseDown);
             this.Track_AudioTrack.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Track_AudioTreck_MouseUp);

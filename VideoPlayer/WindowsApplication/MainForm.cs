@@ -298,12 +298,9 @@ namespace WindowsApplication
             SB.ClearList();
             if (File.Exists("JSON /" + filename + "+" + video.Duration + ".json"))
             {
-
                 Reload_Bookmarks();
                 SB.ReloadList(dataSet);
-
-            }
-            
+            }            
         }
         private void MainForm_KeyDown(object sender, KeyEventArgs e)
         {
@@ -314,7 +311,6 @@ namespace WindowsApplication
         }
         public void Reload_Bookmarks()
         {
-
             dataSet = JsonConvert.DeserializeObject<DataSet>(File.ReadAllText("JSON /" + filename + "+" + video.Duration + ".json"));
 
             DataTable dataTable = dataSet.Tables[0];
@@ -333,26 +329,17 @@ namespace WindowsApplication
 
                 dt = Convert.ToDateTime("00:" + row["Start"]);
 
-
                 Bookmark = new BasicShapeScrollBarBookmark(Convert.ToString(row["Name"]) + "Start", dt.Second, ScrollBarBookmarkAlignment.LeftOrTop, 5, 5, ScrollbarBookmarkShape.Rectangle, cl, true, false, null);
                 Track_AudioTrack.Bookmarks.Add(Bookmark);
 
                 dt = Convert.ToDateTime("00:" + row["Finish"]);
                 Bookmark = new BasicShapeScrollBarBookmark(Convert.ToString(row["Name"]) + "Finish", dt.Second, ScrollBarBookmarkAlignment.LeftOrTop, 5, 5, ScrollbarBookmarkShape.Rectangle, cl, true, false, null);
                 Track_AudioTrack.Bookmarks.Add(Bookmark);
-
             }
-
         }
-
         private void Track_AudioTrack_Move(object sender, EventArgs e)
         {
             
-        }
-
-        private void Track_AudioTrack_MouseMove(object sender, EnhancedMouseEventArgs e)
-        {
-            t.Show("тут должна быть подсказка", Track_AudioTrack);
-        }
+        }        
     }
 }

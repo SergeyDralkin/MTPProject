@@ -5,7 +5,6 @@ using System.IO;
 using System.Data;
 using Microsoft.DirectX.AudioVideoPlayback;
 using ProXoft.WinForms;
-
 using Newtonsoft.Json;
 
 namespace WindowsApplication
